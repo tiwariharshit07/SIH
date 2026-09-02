@@ -343,8 +343,8 @@ def predict_severity():
 # ============================================================
 # START SERVER
 # ============================================================
-
 if __name__ == "__main__":
+    import os
 
     print("=" * 60)
     print("DISASTER SEVERITY AI API")
@@ -353,25 +353,15 @@ if __name__ == "__main__":
     print()
     print("Loading AI models...")
 
-    print(
-        "Severity classifier loaded!"
-    )
-
-    print(
-        "Severity score model loaded!"
-    )
+    print("Severity classifier loaded!")
+    print("Severity score model loaded!")
 
     print()
     print("API running at:")
-    print(
-        "http://127.0.0.1:5001"
-    )
+
+    port = int(os.environ.get("PORT", 5001))
+    print(f"http://127.0.0.1:{port}")
 
     print("=" * 60)
 
-
-    app.run(
-        host="0.0.0.0",
-        port=5001,
-        debug=True
-    )
+    app.run(host="0.0.0.0", port=port, debug=False)
