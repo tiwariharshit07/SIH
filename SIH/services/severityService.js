@@ -1,6 +1,5 @@
 const SEVERITY_AI_URL =
-    "http://127.0.0.1:5001/predict-severity";
-
+    `${process.env.ML_API_URL}/predict-severity`;
 
 async function predictSeverity(inputs) {
 
