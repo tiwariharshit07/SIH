@@ -5,6 +5,8 @@ async function predictSeverity(inputs) {
 
     try {
 
+                console.log("Calling ML API at:", SEVERITY_AI_URL); // DEBUG LINE  
+
         const response = await fetch(
             SEVERITY_AI_URL,
             {
@@ -44,6 +46,13 @@ async function predictSeverity(inputs) {
             }
         );
 
+         // NEW: check response before parsing JSON
+        if (!response.ok) {
+            const text = await response.text();
+            console.error("ML API returned non-OK status:", response.status, text.slice(0, 200));
+            throw new Error(`Severity AI returned status ${response.status}`);
+        }
+         
 
         const data =
             await response.json();
